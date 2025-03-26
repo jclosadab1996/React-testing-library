@@ -13,3 +13,14 @@ describe("Mi primer test", () => {
     expect(text1).toBe(text2);
   });
 });
+
+it("Should be palindrome", () => {
+  const palindromeVerify = (word: string) => {
+    const reverseWord = word.split("").reverse().join("");
+    if (reverseWord === word) return true;
+    return false;
+  };
+
+  const isPalindrome = palindromeVerify("oso");
+  expect(isPalindrome).toBe(true);
+});
