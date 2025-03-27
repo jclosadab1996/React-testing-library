@@ -65,8 +65,8 @@ describe("<Login />", () => {
       fireEvent.click(buttonLogin);
     });
     await waitFor(() => {
-      expect(mockGetAuth).toHaveBeenCalledWith("validUser", "validPassword");
-      expect(mockNavigate).toHaveBeenCalledWith("/orders");
+        expect(mockGetAuth).toHaveBeenCalledWith('validUser', 'validPassword');
+        expect(mockNavigate).toHaveBeenCalledWith('/orders');
     });
   });
 });

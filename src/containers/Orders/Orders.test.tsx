@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import { getOrders } from "../../services/getOrders";
 import { render, screen, waitFor } from "@testing-library/react";
 import { SessionProvider, useSession } from "../../context/AuthContext";
-import { getSummaryOrders } from "../../utils/sumamry";
+import { getSummaryOrders } from '../../utils/sumamry';
 
 vi.mock("../../services/getOrders", () => ({
   getOrders: vi.fn(),
@@ -56,9 +56,9 @@ const mockOrders = [
 ];
 
 describe("<Orders />", () => {
-  const handleRenderOrders = (userRole: string) => {
+  const handleRenderOrders = (userRole) => {
     const mockUser = userRole ? { role: userRole } : null;
-    (useSession as Mock).mockReturnValue({ user: mockUser });
+    (useSession as Mock).mockReturnValue({ user: mockUser })
     render(
       <MemoryRouter>
         <SessionProvider>
@@ -69,22 +69,22 @@ describe("<Orders />", () => {
   };
 
   it("deberia mostrar las ordenes", async () => {
-    mockgetOrders.mockResolvedValue(mockOrders);
-    handleRenderOrders("visualizer");
+    mockgetOrders.mockResolvedValue(mockOrders)
+    handleRenderOrders('visualizer');
 
     await waitFor(() => {
-      const orders = screen.getAllByRole("heading", { level: 3 });
-      expect(orders).toHaveLength(mockOrders.length);
-    });
+        const orders = screen.getAllByRole('heading', { level: 3 });
+        expect(orders).toHaveLength(mockOrders.length);
+    })
   });
 
-  it("deberia mostrar seccion para superadmins", async () => {
+  it('deberia mostrar seccion para superadmins', async () => {
     mockgetOrders.mockResolvedValue(mockOrders);
-    handleRenderOrders("superadmin");
+    handleRenderOrders('superadmin');
     await waitFor(() => {
-      const { totalOrders } = getSummaryOrders(mockOrders);
-      const totalOrdersElement = screen.getByTestId("totalOrders").textContent;
-      expect(totalOrdersElement).toBe(totalOrders.toString());
+        const { totalOrders } = getSummaryOrders(mockOrders)
+        const totalOrdersElement = screen.getByTestId("totalOrders").textContent;
+        expect(totalOrdersElement).toBe(totalOrders.toString());
     });
-  });
+  })
 });

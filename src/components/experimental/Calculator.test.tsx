@@ -10,7 +10,7 @@ describe("<Calculaltor/>", () => {
 
   it.each(useCasesTest)(
     "deberia retornar $expected cuando $a y $b son $operation",
-    ({ a, b, operation, expected }) => {
+    ({a, b, operation, expected}) => {
       render(<Calculator a={a} b={b} operation={operation} />);
       const result = screen.getByText(`Result: ${expected}`);
       expect(result).toBeInTheDocument();
